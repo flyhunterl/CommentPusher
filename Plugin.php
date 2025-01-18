@@ -91,7 +91,7 @@ class CommentPusher_Plugin implements Typecho_Plugin_Interface
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data, JSON_UNESCAPED_UNICODE));
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
             
@@ -111,12 +111,12 @@ class CommentPusher_Plugin implements Typecho_Plugin_Interface
                 throw new Exception('推送失败: ' . ($result['msg'] ?? '未知错误'));
             }
             
-            // 显示成功消息
-            Typecho_Widget_Notice::success(_t('推送成功'));
+            // 只记录日志，不显示通知
+            error_log('WxPusher 推送成功');
             return $result;
             
         } catch (Exception $e) {
-            Typecho_Widget_Notice::error(_t('推送失败: ' . $e->getMessage()));
+            // 记录错误日志
             error_log('WxPusher 推送异常: ' . $e->getMessage());
             return false;
         }
