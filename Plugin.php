@@ -5,9 +5,9 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * 使用 WxPusher 推送评论通知到微信
  * 
  * @package CommentPusher 
- * @author YourName
+ * @author flyhunterl
  * @version 1.0.0
- * @link https://github.com/yourusername/CommentPusher
+ * @link https://github.com/flyhunterl/CommentPusher
  */
 class CommentPusher_Plugin implements Typecho_Plugin_Interface
 {
